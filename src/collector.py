@@ -1,15 +1,18 @@
-from time import sleep
-
 import psutil
+import modify_metrics
 import os
-from psutil._common import bytes2human
 def get_cpu_data():
-    """"""
+    """Gets using psutil API list of percentages per core and aggragated percentage in cpu,
+     modifies them to become strings with '%' symbols at the end.
+     Args:
+     Return value:
+        tuple: (list: str: percentage per core, str: aggregated percentage)
+        """
     percentage_list_per_core = psutil.cpu_percent(percpu=True)
-    percentage_aggragated = psutil.cpu_percent()
-    percentage_list_per_core = _convert_num_list_to_percentage(percentage_list_per_core)
-    percentage_aggragated = _convert_num_to_percentage(percentage_aggragated)
-    return percentage_list_per_core, percentage_aggragated
+    percentage_aggregated = psutil.cpu_percent()
+    percentage_list_per_core = modify_metrics.convert_num_list_to_percentage(percentage_list_per_core)
+    percentage_aggregated = modify_metrics.convert_num_to_percentage(percentage_aggregated)
+    return percentage_list_per_core, percentage_aggregated
 
 def get_memory_data():
     """Gets using psutil API various data on memory, extracts out of it only
@@ -20,9 +23,9 @@ def get_memory_data():
         tuple: (str: used memory, str: total memory, str: percentage of used memory)
         """
     memory_data = psutil.virtual_memory()
-    total_memory = bytes2human(memory_data.total)
-    used_memory = bytes2human(memory_data.used)
-    used_memory_percentage = _convert_num_to_percentage(memory_data.percent)
+    total_memory = memory_data.total
+    used_memory = memory_data.used
+    used_memory_percentage = modify_metrics.convert_num_to_percentage(memory_data.percent)
     return used_memory, total_memory, used_memory_percentage
 
 def get_disk_data():
@@ -33,9 +36,9 @@ def get_disk_data():
                 #skip cd-rom drives with no disk, which may raise an error if we don't skip
                 continue
         usage = psutil.disk_usage(part.mountpoint)
-        total_partition = bytes2human(usage.total)
-        used_partition = bytes2human(usage.used)
-        used_partition_percentage = _convert_num_to_percentage(usage.percent)
+        total_partition = usage.total
+        used_partition = usage.used
+        used_partition_percentage = modify_metrics.convert_num_to_percentage(usage.percent)
         partitions_data_list.append((used_partition,total_partition,used_partition_percentage))
     return partitions_data_list
 
@@ -44,32 +47,22 @@ def get_network_data(interval, prev_bytes_sent=0, prev_bytes_recv=0):
     network_data = psutil.net_io_counters()
     bytes_sent = network_data.bytes_sent
     bytes_recv = network_data.bytes_recv
-    upload_speed = _calculate_network_speed(interval, bytes_sent, prev_bytes_sent)
-    upload_speed = _add_mbps_of_measure_to_speed(upload_speed)
-    download_speed = _calculate_network_speed(interval, bytes_recv, prev_bytes_recv)
-    download_speed = _add_mbps_of_measure_to_speed(download_speed)
+    upload_speed = __calculate_network_speed(interval, bytes_sent, prev_bytes_sent)
+    upload_speed = modify_metrics.add_mbps_of_measure_to_speed(upload_speed)
+    download_speed = __calculate_network_speed(interval, bytes_recv, prev_bytes_recv)
+    download_speed = modify_metrics.add_mbps_of_measure_to_speed(download_speed)
 
     return upload_speed,download_speed, bytes_sent, bytes_recv
 
-def _add_mbps_of_measure_to_speed(speed):
-    return str(speed)+" Mbps"
-def _calculate_network_speed(interval, curr_bytes, prev_bytes):
-    """"""
+def __calculate_network_speed(interval, curr_bytes, prev_bytes):
+    """calculates an upload/download speed in bytes per sec with the formula
+    (current bytes - previous bytes) / time passed. then changes speed to mbps.
+    Args:
+        interval: time passed since previous bytes captured
+        curr_bytes: current bytes captured sent/received in network
+        prev_bytes: bytes captured sent/received in network x time before current bytes were captured
+    Return value:
+        float: download/upload speed"""
     speed_in_bytes_per_sec = (curr_bytes-prev_bytes)/interval
     speed_in_mbps = speed_in_bytes_per_sec * 8.0* (10**-6)
     return speed_in_mbps
-def _convert_num_to_percentage(percentage_num):
-    """gets a value, makes it a string, and adds a '%' symbol at the end.
-    wor"""
-    if type(percentage_num) == float or type(percentage_num) == int:
-        percentage_value = str(percentage_num)
-        percentage_value+="%"
-        return percentage_value
-    return None
-def _convert_num_list_to_percentage(num_list):
-    percentage_list = []
-    for percentage_num in num_list:
-        converted_num = _convert_num_to_percentage(percentage_num)
-        if converted_num:
-            percentage_list.append(converted_num)
-    return percentage_list
