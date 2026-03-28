@@ -3,7 +3,7 @@ import collector
 from rich.live import Live
 from rich.table import Table
 import modify_metrics
-INTERVAL = 2
+INTERVAL = 1
 REFRESH_PER_SECOND = 1
 
 def make_cpu_cores_table(cpu_percentage_list_per_core):
@@ -70,10 +70,8 @@ def main():
             memory_tbl = make_memory_table()
             disk_tbl = make_disk_table()
             network_tbl, prev_network_bytes_sent, prev_network_bytes_recv, first_time_flag= make_network_table(first_time_flag,prev_network_bytes_sent,prev_network_bytes_recv)
-            grid.add_column(cpu_tbl)
-            grid.add_column(memory_tbl)
-            grid.add_column(disk_tbl)
-            grid.add_column(network_tbl)
+            grid.add_row(cpu_tbl,disk_tbl)
+            grid.add_row(memory_tbl,network_tbl)
             live.update(grid)
             time.sleep(INTERVAL)
 if __name__ == "__main__":
