@@ -2,8 +2,9 @@ import time
 import collector
 from rich.live import Live
 from rich.table import Table
-from rich.progress import track
 import modify_metrics
+INTERVAL = 2
+REFRESH_PER_SECOND = 1
 
 def make_cpu_cores_table(cpu_percentage_list_per_core):
     core_tbl = Table(box=None)
@@ -30,7 +31,7 @@ def make_memory_table():
     return memory_tbl
 
 def make_disk_table():
-    disk_tbl = Table(title="Disk Monitor", show_lines=False)
+    disk_tbl = Table(title="Disk Monitor", show_header=False, show_edge=True, show_lines=False)
     partitions_data_list = collector.get_disk_data()
     for part in partitions_data_list:
         partition_mountpoint, used_partition_bytes, total_partition_bytes, used_partition_percentage = part
@@ -43,19 +44,37 @@ def make_disk_table():
         disk_tbl.add_row(part_tbl)
     return disk_tbl
 
+def make_network_table(first_time_flag, prev_bytes_sent, prev_bytes_recv):
+    network_tbl = Table("Network Metric","Network Value",title="Network Monitor",show_lines=True)
+    if first_time_flag:
+        bytes_sent, bytes_recv = collector.get_network_data(INTERVAL)[2:]
+        upload_speed = "TBD"
+        download_speed = "TBD"
+    else:
+        upload_speed, download_speed, bytes_sent, bytes_recv = collector.get_network_data(INTERVAL, prev_bytes_sent, prev_bytes_recv)
+    network_tbl.add_row("Upload Speed", upload_speed)
+    network_tbl.add_row("Download Speed", download_speed)
+    network_tbl.add_row("Data Sent in Bytes", str(bytes_sent))
+    network_tbl.add_row("Data Received in Bytes", str(bytes_recv))
+    return network_tbl,bytes_sent, bytes_recv, False
 
 def main():
 
-    with Live(refresh_per_second=1) as live:
+    with (Live(refresh_per_second=REFRESH_PER_SECOND) as live):
+        first_time_flag= True
+        prev_network_bytes_sent = 0
+        prev_network_bytes_recv = 0
         while True:
             grid = Table(box=None, title="[cyan]System Monitor")
             cpu_tbl = make_cpu_table()
             memory_tbl = make_memory_table()
             disk_tbl = make_disk_table()
+            network_tbl, prev_network_bytes_sent, prev_network_bytes_recv, first_time_flag= make_network_table(first_time_flag,prev_network_bytes_sent,prev_network_bytes_recv)
             grid.add_column(cpu_tbl)
             grid.add_column(memory_tbl)
             grid.add_column(disk_tbl)
+            grid.add_column(network_tbl)
             live.update(grid)
-            time.sleep(2)
+            time.sleep(INTERVAL)
 if __name__ == "__main__":
     main()

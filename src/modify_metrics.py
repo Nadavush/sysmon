@@ -16,5 +16,6 @@ def convert_num_list_to_percentage(num_list):
         if converted_num:
             percentage_list.append(converted_num)
     return percentage_list
-def add_mbps_of_measure_to_speed(speed):
-    return str(speed)+" Mbps"
+def add_mbps_and_format_speed(value):
+    formatted_value = "{:.2f}".format(value)
+    return formatted_value + " Mbps"

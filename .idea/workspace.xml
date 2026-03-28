@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5dad1b3-e262-4f49-8cbc-a06a20fcd7f0" name="Changes" comment="added a module with helper functions for modifying metrics from int to string with %, or from bytes as int to string as MB/KB/GB etc.&#10;&#10;added memory table to display.py">
+    <list default="true" id="e5dad1b3-e262-4f49-8cbc-a06a20fcd7f0" name="Changes" comment="- Added disk monitor in display.py, made it per partition&#10;- Added to collector.py in get_disk_data() the value of the partition name for me to get in display.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/design.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/design.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/collector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/display.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/display.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modify_metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modify_metrics.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +89,7 @@
       <workItem from="1774705690636" duration="1085000" />
       <workItem from="1774715406694" duration="432000" />
       <workItem from="1774716422815" duration="29000" />
-      <workItem from="1774729895679" duration="8098000" />
+      <workItem from="1774729895679" duration="10965000" />
     </task>
     <task id="LOCAL‎-00001" summary="test">
       <option name="closed" value="true" />
@@ -121,7 +123,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1774736663240</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL‎-00005" summary="- Added disk monitor in display.py, made it per partition&#10;- Added to collector.py in get_disk_data() the value of the partition name for me to get in display.py">
+      <option name="closed" value="true" />
+      <created>1774738251499</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL‎-00005" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1774738251499</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,7 +153,8 @@
     <MESSAGE value="added the logic of collector.py - all of the functions that get the parameter and additional helper funcs. Started working on display.py- thoguht about the way the metrics should be displayed (in a grid which holds various tables)." />
     <MESSAGE value="added a bit to the design doc" />
     <MESSAGE value="added a module with helper functions for modifying metrics from int to string with %, or from bytes as int to string as MB/KB/GB etc.&#10;&#10;added memory table to display.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a module with helper functions for modifying metrics from int to string with %, or from bytes as int to string as MB/KB/GB etc.&#10;&#10;added memory table to display.py" />
+    <MESSAGE value="- Added disk monitor in display.py, made it per partition&#10;- Added to collector.py in get_disk_data() the value of the partition name for me to get in display.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added disk monitor in display.py, made it per partition&#10;- Added to collector.py in get_disk_data() the value of the partition name for me to get in display.py" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sysmon$hello.coverage" NAME="hello Coverage Results" MODIFIED="1774708013467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />

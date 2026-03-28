@@ -49,9 +49,9 @@ def get_network_data(interval, prev_bytes_sent=0, prev_bytes_recv=0):
     bytes_sent = network_data.bytes_sent
     bytes_recv = network_data.bytes_recv
     upload_speed = __calculate_network_speed(interval, bytes_sent, prev_bytes_sent)
-    upload_speed = modify_metrics.add_mbps_of_measure_to_speed(upload_speed)
+    upload_speed = modify_metrics.add_mbps_and_format_speed(upload_speed)
     download_speed = __calculate_network_speed(interval, bytes_recv, prev_bytes_recv)
-    download_speed = modify_metrics.add_mbps_of_measure_to_speed(download_speed)
+    download_speed = modify_metrics.add_mbps_and_format_speed(download_speed)
 
     return upload_speed,download_speed, bytes_sent, bytes_recv
 
