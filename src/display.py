@@ -29,6 +29,21 @@ def make_memory_table():
     memory_tbl.add_row("Percentage of Used Memory", used_memory_percentage)
     return memory_tbl
 
+def make_disk_table():
+    disk_tbl = Table(title="Disk Monitor", show_lines=False)
+    partitions_data_list = collector.get_disk_data()
+    for part in partitions_data_list:
+        partition_mountpoint, used_partition_bytes, total_partition_bytes, used_partition_percentage = part
+        used_partition = modify_metrics.bytes2human(used_partition_bytes)
+        total_partition = modify_metrics.bytes2human(total_partition_bytes)
+        part_tbl = Table(partition_mountpoint+" Metric", partition_mountpoint+" Value", show_lines=True)
+        part_tbl.add_row("Used Partition",used_partition)
+        part_tbl.add_row("Total Partition", total_partition)
+        part_tbl.add_row("Percentage of Used Partition", used_partition_percentage)
+        disk_tbl.add_row(part_tbl)
+    return disk_tbl
+
+
 def main():
 
     with Live(refresh_per_second=1) as live:
@@ -36,8 +51,10 @@ def main():
             grid = Table(box=None, title="[cyan]System Monitor")
             cpu_tbl = make_cpu_table()
             memory_tbl = make_memory_table()
+            disk_tbl = make_disk_table()
             grid.add_column(cpu_tbl)
             grid.add_column(memory_tbl)
+            grid.add_column(disk_tbl)
             live.update(grid)
             time.sleep(2)
 if __name__ == "__main__":

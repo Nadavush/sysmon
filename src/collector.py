@@ -1,6 +1,7 @@
 import psutil
 import modify_metrics
 import os
+
 def get_cpu_data():
     """Gets using psutil API list of percentages per core and aggragated percentage in cpu,
      modifies them to become strings with '%' symbols at the end.
@@ -39,7 +40,7 @@ def get_disk_data():
         total_partition = usage.total
         used_partition = usage.used
         used_partition_percentage = modify_metrics.convert_num_to_percentage(usage.percent)
-        partitions_data_list.append((used_partition,total_partition,used_partition_percentage))
+        partitions_data_list.append((part.mountpoint,used_partition,total_partition,used_partition_percentage))
     return partitions_data_list
 
 def get_network_data(interval, prev_bytes_sent=0, prev_bytes_recv=0):
