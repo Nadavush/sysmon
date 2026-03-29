@@ -4,8 +4,8 @@ from rich.live import Live
 from rich.table import Table
 import modify_metrics
 import color_values
-INTERVAL = 0.5
-REFRESH_PER_SECOND = 0.5
+INTERVAL = 2
+REFRESH_PER_SECOND = 2
 CPU_READINGS_INDEX = 0
 MEMORY_READINGS_INDEX = 1
 DISK_READINGS_INDEX = 2

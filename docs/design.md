@@ -8,8 +8,19 @@
 
 ## Abstract Idea
 
-A command-line tool that tracks CPU, memory, network, and disk usage in real time and displays live metrics of them in the terminal with a clean, colored interface. The tool additionally logs historical data to a file, which may be formated for both CSV and JSON for its output. 
-**complete later**
+A command-line tool that tracks CPU, memory, network, and disk usage in real time and displays live metrics of them in the terminal with a clean, colored interface. The tool additionally logs historical data to a file, which may be formated for both CSV and JSON for its output. Moreover, the tool may optionally alert the user with a desktop message when a certain metric in the cpu or memory exceeds its threshold, and aside from displaying and logging metrics, a user can instead ask for a report by date on min/max/avg of certain metrics.
+
+## Abstract Architectural Design
+What I have in mind is a collector.py that has in it functions that collect system data using the psutil API, a display.py that when ordered, displays with a not-eye-soring interface the system reading it gets using rich API, a logger.py that when a system reading occurs, logs the readings in a line formatted as JSON or CSV, a report.py that stores in it functions that create a daily report by reading a specified log file, a warning_handling.py that when ordered, makes sure if a value in a system reading exceeded its threshold- a pop-up message will be displayed to the user. Last but not least there is main.py, serving as an entry point for the program, and handles CLI input and error messages.
+
+Abstractly talking (in the time of typing i still didn't finish programming everything, but just the core), I changed my mind many many times on a few architectural ideas of what's "right" to do, especially in how each module is dependent on another.
+I am fully aware that one of the most important architectural aspects of said exercise is to plan a project with many **independent** modules, therefore i didn't find it right when I used display.py to order other modules to do things, as essentialy it was the one who got the data from the collector.py, as essentialy in display.py we have the infinite loop of calling for the system metrics. As of typing, im quite confident the "correct" design for this project that is conceptually event oriented yet makes each module independent, is a design where main handles the requests from one module to another- so each module will only know main and not all of the others' internals. For example when display needs every 2 seconds a new reading, it asks for it not from collector, but from main, which has a function of getting all the readings, and additionaly calls logger to log them, which makes display.py only display the readings and not ask now for logger or collector. Moreover, im more confident it's conceptually ok because main is the one holding the variables from the input, like per say the logging file path, therefore it is the one who should order logger when to log and not other modules. What I'll do is a function in main called get_readings() that will be asked for from display every x seconds, and will give back the readings, in addition to logging them, in addition to checking if one exceeds the thresholds-- each action is a call to a different module.
+
+Another thought i had stuck in my head when starting to code the foundation was whether collector.py should be the one making the data more string-y (like adding a % to percentage), addings GB or MB or KB depending on the bytes, or should it be display. After many many many self questions i think that as long as the data is not a percentage we should send it as it is, and display will handle this. I made an additional module that both display and collector use called modify_metrics.py that converts bytes to normal metric sizes, adds mbps for network speed, etc.
+
+## Bugs Along the Way
+
+
 
 ## Drafts
 **basically like all of my thoughts piled here to be organized soon. I really recommend not reading, it's the unclear and unorganized thoughts I've had throughout working on this project.**
