@@ -1,10 +1,9 @@
 import time
-import collector
+import main
 from rich.live import Live
 from rich.table import Table
 import modify_metrics
 import color_values
-INTERVAL = 2
 REFRESH_PER_SECOND = 2
 CPU_READINGS_INDEX = 0
 MEMORY_READINGS_INDEX = 1
@@ -56,7 +55,7 @@ def make_disk_table(disk_readings):
 def make_network_table(first_time_flag, network_readings):
     network_tbl = Table("Network Metric","Network Value",title="Network Monitor",show_lines=True)
     if first_time_flag:
-        bytes_sent, bytes_recv = collector.get_network_data(INTERVAL)[2:]
+        bytes_sent, bytes_recv = network_readings[2:]
         upload_speed = "TBD"
         download_speed = "TBD"
     else:
@@ -67,11 +66,9 @@ def make_network_table(first_time_flag, network_readings):
     network_tbl.add_row("Data Received in Bytes", str(bytes_recv))
     return network_tbl,bytes_sent, bytes_recv, False
 
-def get_sys_readings(prev_bytes_sent, prev_bytes_recv):
-    return collector.get_cpu_data(),collector.get_memory_data(), collector.get_disk_data(), collector.get_network_data(INTERVAL, prev_bytes_sent, prev_bytes_recv)
 
 
-def main():
+def display_monitor(interval):
 
     with (Live(refresh_per_second=REFRESH_PER_SECOND) as live):
         first_time_flag= True
@@ -79,7 +76,7 @@ def main():
         prev_network_bytes_recv = 0
         while True:
             grid = Table(box=None, title="[cyan]System Monitor")
-            system_readings = get_sys_readings(prev_network_bytes_sent, prev_network_bytes_recv)
+            system_readings = main.get_sys_readings(prev_network_bytes_sent, prev_network_bytes_recv, interval)
             cpu_tbl = make_cpu_table(system_readings[CPU_READINGS_INDEX])
             memory_tbl = make_memory_table(system_readings[MEMORY_READINGS_INDEX])
             disk_tbl = make_disk_table(system_readings[DISK_READINGS_INDEX])
@@ -87,7 +84,4 @@ def main():
             grid.add_row(cpu_tbl,disk_tbl)
             grid.add_row(memory_tbl,network_tbl)
             live.update(grid)
-            #logger line
-            time.sleep(INTERVAL)
-if __name__ == "__main__":
-    main()
+            time.sleep(interval)
