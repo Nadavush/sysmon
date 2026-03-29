@@ -2,7 +2,7 @@
 
 **Language:** Python
 
-**Dates:** 15/03, 16/03, 28/03
+**Dates:** 15/03, 16/03, 28/03, 29/03
 
 ---
 
@@ -19,7 +19,7 @@ I am fully aware that one of the most important architectural aspects of said ex
 Another thought i had stuck in my head when starting to code the foundation was whether collector.py should be the one making the data more string-y (like adding a % to percentage), addings GB or MB or KB depending on the bytes, or should it be display. After many many many self questions i think that as long as the data is not a percentage we should send it as it is, and display will handle this. I made an additional module that both display and collector use called modify_metrics.py that converts bytes to normal metric sizes, adds mbps for network speed, etc.
 
 ## Bugs Along the Way
-
+I had a thing when i finished display and had a grid of 4 different tables, because of the 4 different tables in 4 different collumns the CLI started flickering, at first i thought it was because every x seconds the cpu calculates the network speed is the source of the problem, but after testing with/without tables and calculations- that the problem stems from having 4 different tables on 4 diff collumns. so instead i changed the grid to have 2 rows in each one 2 collumns. now it fits good with no flickering
 
 
 ## Drafts
