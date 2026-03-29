@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5dad1b3-e262-4f49-8cbc-a06a20fcd7f0" name="Changes" comment="- Added disk monitor in display.py, made it per partition&#10;- Added to collector.py in get_disk_data() the value of the partition name for me to get in display.py">
+    <list default="true" id="e5dad1b3-e262-4f49-8cbc-a06a20fcd7f0" name="Changes" comment="- Fixed flickering bug">
+      <change afterPath="$PROJECT_DIR$/src/color_values.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/design.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/design.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/display.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/display.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +129,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1774738251499</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL‎-00006" summary="- Fixed flickering bug">
+      <option name="closed" value="true" />
+      <created>1774742154640</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL‎-00006" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1774742154640</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,13 +160,14 @@
     <MESSAGE value="added a bit to the design doc" />
     <MESSAGE value="added a module with helper functions for modifying metrics from int to string with %, or from bytes as int to string as MB/KB/GB etc.&#10;&#10;added memory table to display.py" />
     <MESSAGE value="- Added disk monitor in display.py, made it per partition&#10;- Added to collector.py in get_disk_data() the value of the partition name for me to get in display.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added disk monitor in display.py, made it per partition&#10;- Added to collector.py in get_disk_data() the value of the partition name for me to get in display.py" />
+    <MESSAGE value="- Fixed flickering bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Fixed flickering bug" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sysmon$hello.coverage" NAME="hello Coverage Results" MODIFIED="1774708013467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/sysmon$table.coverage" NAME="table Coverage Results" MODIFIED="1773624665491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.venv/Lib/site-packages/rich" />
     <SUITE FILE_PATH="coverage/sysmon$main.coverage" NAME="main Coverage Results" MODIFIED="1773584976894" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/sysmon$collector.coverage" NAME="collector Coverage Results" MODIFIED="1774736999066" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/sysmon$display.coverage" NAME="display Coverage Results" MODIFIED="1773624716399" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/sysmon$display.coverage" NAME="display Coverage Results" MODIFIED="1774743224965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
