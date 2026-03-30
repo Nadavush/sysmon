@@ -1,4 +1,4 @@
-import csv
+import json
 
 logging_format = ""
 logging_path = ""
@@ -11,11 +11,10 @@ def prepare_logger(input_format, input_path):
     logging_path = input_path
 
 
-def log(system_readings,time):
-    hey = 3
+def log(system_readings):
 
-def json_log(system_readings,time):
-    hey = 4
+    with open(logging_path,'a') as input_file:
+        json.dump(system_readings, input_file)
 
 
 def log_csv(system_readings,time):

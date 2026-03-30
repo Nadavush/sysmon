@@ -49,4 +49,4 @@ how to write good design doc (https://www.youtube.com/watch?v=bgHL41e7vgI)
 psutil API tutorial (https://psutil.readthedocs.io/en/latest/api.html)
 https://appdividend.com/how-to-format-float-values-in-python/
 https://www.youtube.com/watch?v=MWYRGLKMzAQ
-https://youtu.be/FPSKYi5jUG8?si=RfqK9x3hdwYJ61DJhttps://stackoverflow.com/questions/24962908/how-can-i-read-only-the-header-column-of-a-csv-file-using-python
+https://youtu.be/FPSKYi5jUG8?si=RfqK9x3hdwYJ61DJhttps://stackoverflow.com/questions/24962908/how-can-i-read-only-the-header-column-of-a-csv-file-using-pythonhttps://www.geeksforgeeks.org/python/json-dump-in-python/

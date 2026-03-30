@@ -45,8 +45,9 @@ def check_interval(interval, parser):
     return interval
 
 def get_sys_readings(prev_bytes_sent, prev_bytes_recv, interval):
-    system_readings = {"cpu":collector.get_cpu_data(),"memory":collector.get_memory_data(),"disk":collector.get_disk_data(), "network":collector.get_network_data(interval, prev_bytes_sent, prev_bytes_recv)}
-    #logger.log(system_readings, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    system_readings = {"time":datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),"cpu":collector.get_cpu_data(),"memory":collector.get_memory_data(),
+                       "disk":collector.get_disk_data(), "network":collector.get_network_data(interval, prev_bytes_sent, prev_bytes_recv)}
+    logger.log(system_readings)
     return system_readings
 
 def main():
