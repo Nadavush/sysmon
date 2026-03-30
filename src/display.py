@@ -19,7 +19,8 @@ def make_cpu_cores_table(cpu_percentage_list_per_core):
 
 def make_cpu_table(cpu_readings):
     cpu_tbl = Table("CPU Metric", "CPU Value", title="CPU Monitor", show_lines=True)
-    cpu_percentage_list_per_core, cpu_percentage_aggregated = cpu_readings
+    cpu_percentage_list_per_core = cpu_readings["percentage-per-core"]
+    cpu_percentage_aggregated = cpu_readings["percentage-aggregated"]
     cpu_percentage_aggregated = color_values.color_percentage(cpu_percentage_aggregated)
     cpu_tbl.add_row("CPU Usage (aggregated)", cpu_percentage_aggregated)
     core_tbl = make_cpu_cores_table(cpu_percentage_list_per_core)
@@ -28,7 +29,9 @@ def make_cpu_table(cpu_readings):
 
 def make_memory_table(memory_readings):
     memory_tbl = Table("Memory Metric", "Memory Value", title="Memory Monitor", show_lines=True)
-    used_memory_bytes, total_memory_bytes, used_memory_percentage = memory_readings
+    used_memory_bytes = memory_readings["used"]
+    total_memory_bytes = memory_readings["total"]
+    used_memory_percentage = memory_readings["used-percentage"]
     used_memory_percentage = color_values.color_percentage(used_memory_percentage)
     used_memory = modify_metrics.bytes2human(used_memory_bytes)
     total_memory = modify_metrics.bytes2human(total_memory_bytes)
@@ -77,10 +80,10 @@ def display_monitor(interval):
         while True:
             grid = Table(box=None, title="[cyan]System Monitor")
             system_readings = main.get_sys_readings(prev_network_bytes_sent, prev_network_bytes_recv, interval)
-            cpu_tbl = make_cpu_table(system_readings[CPU_READINGS_INDEX])
-            memory_tbl = make_memory_table(system_readings[MEMORY_READINGS_INDEX])
-            disk_tbl = make_disk_table(system_readings[DISK_READINGS_INDEX])
-            network_tbl, prev_network_bytes_sent, prev_network_bytes_recv, first_time_flag= make_network_table(first_time_flag,system_readings[NETWORK_READINGS_INDEX])
+            cpu_tbl = make_cpu_table(system_readings["cpu"])
+            memory_tbl = make_memory_table(system_readings["memory"])
+            disk_tbl = make_disk_table(system_readings["disk"])
+            network_tbl, prev_network_bytes_sent, prev_network_bytes_recv, first_time_flag= make_network_table(first_time_flag,system_readings["network"])
             grid.add_row(cpu_tbl,disk_tbl)
             grid.add_row(memory_tbl,network_tbl)
             live.update(grid)

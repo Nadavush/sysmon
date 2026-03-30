@@ -13,7 +13,7 @@ def get_cpu_data():
     percentage_aggregated = psutil.cpu_percent()
     percentage_list_per_core = modify_metrics.convert_num_list_to_percentage(percentage_list_per_core)
     percentage_aggregated = modify_metrics.convert_num_to_percentage(percentage_aggregated)
-    return percentage_list_per_core, percentage_aggregated
+    return {"percentages-per-core":percentage_list_per_core, "percentage-aggregated":percentage_aggregated}
 
 def get_memory_data():
     """Gets using psutil API various data on memory, extracts out of it only
@@ -27,7 +27,7 @@ def get_memory_data():
     total_memory = memory_data.total
     used_memory = memory_data.used
     used_memory_percentage = modify_metrics.convert_num_to_percentage(memory_data.percent)
-    return used_memory, total_memory, used_memory_percentage
+    return {"used":used_memory, "total":total_memory, "used-percentage":used_memory_percentage}
 
 def get_disk_data():
     partitions_data_list = []
@@ -40,7 +40,7 @@ def get_disk_data():
         total_partition = usage.total
         used_partition = usage.used
         used_partition_percentage = modify_metrics.convert_num_to_percentage(usage.percent)
-        partitions_data_list.append((part.mountpoint,used_partition,total_partition,used_partition_percentage))
+        partitions_data_list.append({"partition-mountpoint":part.mountpoint,"used":used_partition,"total":total_partition,"used-percentage":used_partition_percentage})
     return partitions_data_list
 
 def get_network_data(interval, prev_bytes_sent=0, prev_bytes_recv=0):
@@ -53,7 +53,7 @@ def get_network_data(interval, prev_bytes_sent=0, prev_bytes_recv=0):
     download_speed = __calculate_network_speed(interval, bytes_recv, prev_bytes_recv)
     download_speed = modify_metrics.add_mbps_and_format_speed(download_speed)
 
-    return upload_speed,download_speed, bytes_sent, bytes_recv
+    return {"upload-speed":upload_speed,"download-speed":download_speed, "sent":bytes_sent, "received":bytes_recv}
 
 def __calculate_network_speed(interval, curr_bytes, prev_bytes):
     """calculates an upload/download speed in bytes per sec with the formula
