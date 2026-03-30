@@ -13,7 +13,7 @@ def get_cpu_data():
     percentage_aggregated = psutil.cpu_percent()
     percentage_list_per_core = modify_metrics.convert_num_list_to_percentage(percentage_list_per_core)
     percentage_aggregated = modify_metrics.convert_num_to_percentage(percentage_aggregated)
-    return {"percentages-per-core":percentage_list_per_core, "percentage-aggregated":percentage_aggregated}
+    return {"percentage-per-core":percentage_list_per_core, "percentage-aggregated":percentage_aggregated}
 
 def get_memory_data():
     """Gets using psutil API various data on memory, extracts out of it only

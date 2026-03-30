@@ -15,7 +15,7 @@ def log(system_readings,time):
     hey = 3
 
 def json_log(system_readings,time):
-
+    hey = 4
 
 
 def log_csv(system_readings,time):
