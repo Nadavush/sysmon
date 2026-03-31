@@ -74,7 +74,13 @@ def make_network_table(first_time_flag, network_readings):
 
 
 def display_monitor(interval):
+    """Creates a table of tables, each one of a different field (eg cpu, memory, disk, network),
+    calls main.get_sys_readings() to get data to display, updates live display every [interval] seconds
+    Args:
+        interval: amount of time that passes between each refresh of the display
 
+    Return value:
+    """
     with (Live(refresh_per_second=REFRESH_PER_SECOND) as live):
         first_time_flag= True
         prev_network_bytes_sent = 0
