@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5dad1b3-e262-4f49-8cbc-a06a20fcd7f0" name="Changes" comment="- added docstrings to collector.py">
+    <list default="true" id="e5dad1b3-e262-4f49-8cbc-a06a20fcd7f0" name="Changes" comment="- added docstring to display.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/design.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/design.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/color_values.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/warn.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/display.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/display.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +65,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -82,7 +86,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main.py" />
-      <option name="PARAMETERS" value="monitor" />
+      <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -117,6 +121,8 @@
       <workItem from="1774715406694" duration="432000" />
       <workItem from="1774716422815" duration="29000" />
       <workItem from="1774729895679" duration="10965000" />
+      <workItem from="1774970505887" duration="3007000" />
+      <workItem from="1774973804717" duration="10419000" />
     </task>
     <task id="LOCAL‎-00001" summary="test">
       <option name="closed" value="true" />
@@ -238,7 +244,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1774916037708</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL‎-00016" summary="- added docstring to display.py">
+      <option name="closed" value="true" />
+      <created>1774916318165</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL‎-00016" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1774916318165</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -271,7 +285,8 @@
     <MESSAGE value="- finished and fixed bugs on the return from collector dictionary" />
     <MESSAGE value="- finally finished the logging thank god" />
     <MESSAGE value="- added docstrings to collector.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="- added docstrings to collector.py" />
+    <MESSAGE value="- added docstring to display.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="- added docstring to display.py" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -287,7 +302,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sysmon$hello.coverage" NAME="hello Coverage Results" MODIFIED="1774708013467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/sysmon$table.coverage" NAME="table Coverage Results" MODIFIED="1773624665491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.venv/Lib/site-packages/rich" />
-    <SUITE FILE_PATH="coverage/sysmon$main.coverage" NAME="main Coverage Results" MODIFIED="1774909541666" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/sysmon$main.coverage" NAME="main Coverage Results" MODIFIED="1774991602597" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/sysmon$collector.coverage" NAME="collector Coverage Results" MODIFIED="1774736999066" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/sysmon$display.coverage" NAME="display Coverage Results" MODIFIED="1774743224965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>

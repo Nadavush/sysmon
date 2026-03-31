@@ -3,14 +3,16 @@ import main
 from rich.live import Live
 from rich.table import Table
 import modify_metrics
-import color_values
+from warn import check_warning_percentage
+from rich.console import Console
 REFRESH_PER_SECOND = 2
 
+warning_list = []
 
 def make_cpu_cores_table(cpu_percentage_list_per_core):
     core_tbl = Table(box=None)
     for core_percentage in cpu_percentage_list_per_core:
-        core_percentage = color_values.color_percentage(core_percentage)
+        core_percentage = check_warning_percentage(core_percentage, is_cpu=True)
         core_tbl.add_row(core_percentage)
     return core_tbl
 
@@ -18,7 +20,7 @@ def make_cpu_table(cpu_readings):
     cpu_tbl = Table("CPU Metric", "CPU Value", title="CPU Monitor", show_lines=True)
     cpu_percentage_list_per_core = cpu_readings["percentage-per-core"]
     cpu_percentage_aggregated = cpu_readings["percentage-aggregated"]
-    cpu_percentage_aggregated = color_values.color_percentage(cpu_percentage_aggregated)
+    cpu_percentage_aggregated = check_warning_percentage(cpu_percentage_aggregated, is_cpu=True)
     cpu_tbl.add_row("CPU Usage (aggregated)", cpu_percentage_aggregated)
     core_tbl = make_cpu_cores_table(cpu_percentage_list_per_core)
     cpu_tbl.add_row("CPU Usage (per-core)", core_tbl)
@@ -29,7 +31,7 @@ def make_memory_table(memory_readings):
     used_memory_bytes = memory_readings["used"]
     total_memory_bytes = memory_readings["total"]
     used_memory_percentage = memory_readings["used-percentage"]
-    used_memory_percentage = color_values.color_percentage(used_memory_percentage)
+    used_memory_percentage = check_warning_percentage(used_memory_percentage, is_mem=True)
     used_memory = modify_metrics.bytes2human(used_memory_bytes)
     total_memory = modify_metrics.bytes2human(total_memory_bytes)
     memory_tbl.add_row("Used Memory", used_memory)
@@ -45,7 +47,6 @@ def make_disk_table(disk_readings):
         used_partition_bytes = part["used"]
         total_partition_bytes = part["total"]
         used_partition_percentage = part["used-percentage"]
-        used_partition_percentage = color_values.color_percentage(used_partition_percentage)
         used_partition = modify_metrics.bytes2human(used_partition_bytes)
         total_partition = modify_metrics.bytes2human(total_partition_bytes)
         part_tbl = Table(partition_mountpoint+" Metric", partition_mountpoint+" Value", show_lines=True)
@@ -71,6 +72,16 @@ def make_network_table(first_time_flag, network_readings):
     network_tbl.add_row("Data Received in Bytes", str(bytes_recv))
     return network_tbl,bytes_sent, bytes_recv, False
 
+def add_warning(string):
+    warning_list.append(string)
+
+def make_warning_tbl():
+    warning_tbl = Table(box=None)
+    global warning_list
+    for warning in warning_list:
+        warning_tbl.add_row(warning)
+    warning_list = []
+    return warning_tbl
 
 
 def display_monitor(interval):
@@ -92,7 +103,9 @@ def display_monitor(interval):
             memory_tbl = make_memory_table(system_readings["memory"])
             disk_tbl = make_disk_table(system_readings["disk"])
             network_tbl, prev_network_bytes_sent, prev_network_bytes_recv, first_time_flag= make_network_table(first_time_flag,system_readings["network"])
+            warning_tbl = make_warning_tbl()
             grid.add_row(cpu_tbl,disk_tbl)
             grid.add_row(memory_tbl,network_tbl)
+            grid.add_row(warning_tbl)
             live.update(grid)
             time.sleep(interval)

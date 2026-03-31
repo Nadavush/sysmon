@@ -12,13 +12,9 @@ def prepare_logger(input_format, input_path):
 
 
 def log(system_readings):
+    if logging_path:
+        with open(logging_path,'a') as input_file:
+            json.dump(system_readings, input_file)
 
-    with open(logging_path,'a') as input_file:
-        json.dump(system_readings, input_file)
 
-
-def log_csv(system_readings,time):
-    with open(logging_path, 'a',newline="") as input_file:
-
-        writer = csv.writer(input_file)
 

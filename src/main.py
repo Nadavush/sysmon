@@ -4,7 +4,7 @@ import os
 import collector
 import display
 import logger
-
+import warn
 DEFAULT_INTERVAL = 2
 BIGGEST_INVALID_INTERVAL = 0
 FILE_TYPE_INDEX = 1
@@ -13,6 +13,7 @@ def handle_monitor(args, parser):
     checked_interval = check_interval(args.interval, parser)
     check_logging_path(args.log, args.format, parser)
     logger.prepare_logger(args.format, args.log)
+    warn.prepare_warn(args.cpu_warn, args.mem_warn)
     display.display_monitor(checked_interval)
 
 
@@ -68,6 +69,8 @@ def main():
         args.func(args, parser)
     except KeyboardInterrupt:
         parser.exit(0, "thanks for using sysmon!")
+
+
 
 
 if __name__ == "__main__":
