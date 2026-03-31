@@ -6,8 +6,10 @@ def get_cpu_data():
     """Gets using psutil API list of percentages per core and aggragated percentage in cpu,
      modifies them to become strings with '%' symbols at the end.
      Args:
+
      Return value:
-        tuple: (list: str: percentage per core, str: aggregated percentage)
+        dict{str:list[str],str:str}: A dictionary of a value title and a list of percentages for each CPU core,
+        an aggregated percentage of the CPU.
         """
     percentage_list_per_core = psutil.cpu_percent(percpu=True)
     percentage_aggregated = psutil.cpu_percent()
@@ -20,8 +22,10 @@ def get_memory_data():
     the used memory (converted from bytes), the total memory (converted from bytes),
     and the used percentage (as a percentage) into a tuple of strings.
     Args:
+
     Return value:
-        tuple: (str: used memory, str: total memory, str: percentage of used memory)
+        dict{str:int,str:int,str:str}: A dictionary of a value title and the number in memory of used bytes,
+        number of total bytes, percentage of used bytes.
         """
     memory_data = psutil.virtual_memory()
     total_memory = memory_data.total
@@ -30,6 +34,14 @@ def get_memory_data():
     return {"used":used_memory, "total":total_memory, "used-percentage":used_memory_percentage}
 
 def get_disk_data():
+    """Gets using psutil API a list of disk partitions, iterates through them and saves each ones data
+    (partition mountpoint, total bytes, used bytes, percentage of used bytes) in a dict.
+    Args:
+
+    Return value:
+        list[dict{str:str,str:int,str:int,str:str}]:A list of dictionaries, each one holding value names and respective
+        values of partition's mountpoint, total bytes, used bytes, used percentage.
+    """
     partitions_data_list = []
     for part in psutil.disk_partitions(all=False):
         if os.name == 'nt':
@@ -44,7 +56,17 @@ def get_disk_data():
     return partitions_data_list
 
 def get_network_data(interval, prev_bytes_sent=0, prev_bytes_recv=0):
-    """"""
+    """Gets using psutil API the number of bytes sent, bytes received, then calculates with args the network upload
+    and download speeds, formats the network speeds, returns the respective data in a dict
+    Args:
+        interval: time between current reading and previous; essential to calculate network speed.
+        prev_bytes_sent: bytes sent in last reading; essential to calculate network speed
+        prev_bytes_recv: bytes received last reading; essential to calculate network speed
+
+    Return value:
+        dict{str:str,str:str,str:int,str:int}: dict of value names corresponding to upload speed (as str), download speed
+        (as str), number of bytes sent (as int), number of bytes received (as int)
+    """
     network_data = psutil.net_io_counters()
     bytes_sent = network_data.bytes_sent
     bytes_recv = network_data.bytes_recv

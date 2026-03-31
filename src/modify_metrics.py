@@ -2,8 +2,7 @@ from psutil._common import bytes2human
 
 
 def convert_num_to_percentage(percentage_num):
-    """gets a value, makes it a string, and adds a '%' symbol at the end.
-    wor"""
+    """converts a value to str and adds to it % symbol at the end"""
     if type(percentage_num) == float or type(percentage_num) == int:
         percentage_value = str(percentage_num)
         percentage_value+="%"

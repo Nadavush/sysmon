@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5dad1b3-e262-4f49-8cbc-a06a20fcd7f0" name="Changes" comment="- finished and fixed bugs on the return from collector dictionary">
+    <list default="true" id="e5dad1b3-e262-4f49-8cbc-a06a20fcd7f0" name="Changes" comment="- finally finished the logging thank god">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/design.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/design.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/collector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modify_metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modify_metrics.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,7 +223,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1774909981899</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL‎-00014" summary="- finally finished the logging thank god">
+      <option name="closed" value="true" />
+      <created>1774911476771</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL‎-00014" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1774911476771</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,17 +262,11 @@
     <MESSAGE value="- added more parsing functionality in main.py- basically finished with subcommands, checking all flags.&#10;&#10;- moved &quot;main character energy&quot; functionality from display.py to main.py- makes main the entry point and makes other modules talk with main rather than with each other" />
     <MESSAGE value="- added more parsing stuff to main&#10;&#10;- revamped completely how the collector returns- returns now dicts instead of tuples for more organization + easier json logging!" />
     <MESSAGE value="- finished and fixed bugs on the return from collector dictionary" />
-    <option name="LAST_COMMIT_MESSAGE" value="- finished and fixed bugs on the return from collector dictionary" />
+    <MESSAGE value="- finally finished the logging thank god" />
+    <option name="LAST_COMMIT_MESSAGE" value="- finally finished the logging thank god" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/collector.py</url>
-          <line>47</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
