@@ -4,9 +4,29 @@ from rich.live import Live
 from rich.table import Table
 import modify_metrics
 from warn import check_warning_percentage
+from rich.console import Console
 REFRESH_PER_SECOND = 2
 
 warning_list = []
+
+def display_report(report_var):
+    report_console = Console(style="bold cyan")
+    if report_var is not str:
+        report_console.print(f"""
+        🆂🆈🆂🅼🅾🅽 🆁🅴🅿🅾🆁🆃
+        =-=-=--=-=-=-=-=-=-=-=--=-=-=-=-
+        The ++highest++ used memory logged is {report_var["highest-mem"]} bytes!
+        The --lowest-- used memory logged is {report_var["lowest-mem"]} bytes....
+        The +-average-+ used memory logged is {report_var["avg-mem"]} bytes.
+        ~~~
+        The ++highest++ used cpu percentage logged is {report_var["highest-cpu"]}%!
+        The --lowest-- used cpu percentage logged is {report_var["lowest-cpu"]}%....
+        The +-average-+ used cpu percentage logged is {report_var["avg-cpu"]}%.
+        """)
+    else:
+        report_console.print(report_var, style="bold red on white")
+
+
 
 def generate_grid(system_readings, first_time_flag):
     grid = Table.grid()

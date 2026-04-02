@@ -19,8 +19,8 @@ def handle_monitor(args, parser):
 
 def handle_report(args, parser):
     checked_date = check_date(args.date, parser)
-    report_var = report.generate_report(args.src)
-    #display.displayreport()
+    report_var = report.generate_report_data(args.src, checked_date)
+    display.display_report(report_var)
 
 def check_logging_path(logging_path, logging_format, parser):
     if logging_path:
