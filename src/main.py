@@ -31,6 +31,13 @@ def check_logging_path(logging_path, logging_format, parser):
             parser.exit(1, "Logging file path does not match specified format")
 
 def check_date(date, parser):
+    """Checks if date is with the format of YYYY-MM-DD, makes default date today.
+    Args:
+        date: the date being checked!
+        parser: passed to exit if there is an error
+
+    Return value:
+        """
     if not date:
         date = datetime.datetime.today().strftime("%Y-%m-%d")
     else:
@@ -46,12 +53,35 @@ def check_interval(interval, parser):
     return interval
 
 def get_sys_readings(prev_bytes_sent, prev_bytes_recv, interval):
+    """Gets from collector all data on cpu, disk, mem, network, and also logs it (if log flag is on)
+    Args:
+        prev_bytes_sent: the previous amount of bytes sent on network, essential for calculating network speed!
+        prev_bytes_recv: the previous amount of bytes received on network, essential for calculating network speed!
+        interval: time passed between 2 readings, again, essential for calculating network speed.
+
+    Return value:
+        dict{time: str(time), cpu: dict{str:list[str],str:str}, memory: dict{str:int,str:int,str:str}, disk: list[dict{str:str,str:int,str:int,str:str}],
+        network: dict{str:str,str:str,str:int,str:int}}: a dict of string keys and corresponding values.
+        -time is the time the reading was called (now)
+        -cpu is the data from collector for cpu
+        -memory is the data from collector for memory
+        -disk is the data from collector for disk
+        -network is the data from collector for network
+        """
     system_readings = {"time":datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),"cpu":collector.get_cpu_data(),"memory":collector.get_memory_data(),
                        "disk":collector.get_disk_data(), "network":collector.get_network_data(interval, prev_bytes_sent, prev_bytes_recv)}
     logger.log(system_readings)
     return system_readings
 
+
 def main():
+    """Parses args using argparse api. has 2 subcommands (monitor and report), each one having their own flags, and report has a non-optional argument.
+    When being parsed argparse detects which subcommands with which flags, detects input errors if any, and corresponding to the subcommand turns on diff func.
+    Also detects at all time if user types ctrl+c.
+    Args:
+
+    Return value:
+    """
     parser = argparse.ArgumentParser(prog="sysmon")
     subparsers = parser.add_subparsers(title="subcommands")
     monitor_parser = subparsers.add_parser("monitor",

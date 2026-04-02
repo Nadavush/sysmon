@@ -5,7 +5,6 @@ def generate_report_data(file_path, date):
         data = json.load(file)
     report_readings_lst = get_all_date_readings(data, date)
     if report_readings_lst:
-
         used_cpu_lst = []
         used_mem_lst = []
         for reading in report_readings_lst:
@@ -17,7 +16,7 @@ def generate_report_data(file_path, date):
         return {"highest-cpu":highest_cpu_percentage, "lowest-cpu":lowest_cpu_percentage,"avg-cpu":avg_cpu_percentage,
             "highest-mem":highest_used_mem,"lowest-mem":lowest_used_mem,"avg-mem":avg_used_mem}
     else:
-        return "It seems there are no logged values with the corresponding date.."
+        return {}
 
 
 def get_highest_lowest_avg(lst):

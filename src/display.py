@@ -11,7 +11,7 @@ warning_list = []
 
 def display_report(report_var):
     report_console = Console(style="bold cyan")
-    if report_var is not str:
+    if report_var != {}:
         report_console.print(f"""
         🆂🆈🆂🅼🅾🅽 🆁🅴🅿🅾🆁🆃
         =-=-=--=-=-=-=-=-=-=-=--=-=-=-=-
@@ -24,7 +24,7 @@ def display_report(report_var):
         The +-average-+ used cpu percentage logged is {report_var["avg-cpu"]}%.
         """)
     else:
-        report_console.print(report_var, style="bold red on white")
+        report_console.print("It seems there were no loggings on the date entered..", style="bold red on white")
 
 
 
