@@ -19,7 +19,7 @@ def generate_grid(system_readings, first_time_flag):
     grid.add_row(cpu_tbl, memory_tbl)
     grid.add_row(disk_tbl, network_tbl)
 
-    return grid, False
+    return grid, prev_network_bytes_sent, prev_network_bytes_recv, False
 
 def make_cpu_cores_table(cpu_percentage_list_per_core):
     core_tbl = Table(box=None)
@@ -104,7 +104,7 @@ def display_monitor(interval):
         prev_network_bytes_recv = 0
         while True:
             system_readings = main.get_sys_readings(prev_network_bytes_sent, prev_network_bytes_recv, interval)
-            grid, first_time_flag = generate_grid(system_readings, first_time_flag)
+            grid, prev_network_bytes_sent, prev_network_bytes_recv, first_time_flag = generate_grid(system_readings, first_time_flag)
             global warning_list
             if warning_list:
                 live.console.print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")

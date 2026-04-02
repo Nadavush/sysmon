@@ -5,6 +5,7 @@ import collector
 import display
 import logger
 import warn
+import report
 DEFAULT_INTERVAL = 2
 BIGGEST_INVALID_INTERVAL = 0
 FILE_TYPE_INDEX = 1
@@ -18,7 +19,7 @@ def handle_monitor(args, parser):
 
 def handle_report(args, parser):
     checked_date = check_date(args.date, parser)
-    #report_var = report.doyourthing()
+    report_var = report.generate_report(args.src)
     #display.displayreport()
 
 def check_logging_path(logging_path, logging_format, parser):
@@ -52,7 +53,7 @@ def get_sys_readings(prev_bytes_sent, prev_bytes_recv, interval):
 
 def main():
     parser = argparse.ArgumentParser(prog="sysmon")
-    subparsers = parser.add_subparsers(title="subcommands", required=True)
+    subparsers = parser.add_subparsers(title="subcommands")
     monitor_parser = subparsers.add_parser("monitor",
                                            help="gets realtime readings from CPU, memory, disks, and network. displays in CLI and logs them into specified log file")
     monitor_parser.set_defaults(func=handle_monitor)
@@ -64,6 +65,7 @@ def main():
     report_parser = subparsers.add_parser("report",help="reads a log file and prints min/avg/max for each metric on a specific date")
     report_parser.set_defaults(func=handle_report)
     report_parser.add_argument("-d","--date", type=str, help="specify the date the report is supposed to be about in YYYY-MM-DD format; default today")
+    report_parser.add_argument("src", type=str, help="specify the file from which the report will be based on")
     try:
         args = parser.parse_args()
         args.func(args, parser)

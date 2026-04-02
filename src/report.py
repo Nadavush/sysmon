@@ -1,5 +1,5 @@
 import json
 
-def parse_file(file_path):
+def generate_report(file_path):
     with open(file_path, 'r') as file:
-        for line in file:
+            data = json.load(file)
