@@ -16,7 +16,6 @@ def handle_monitor(args, parser):
     warn.prepare_warn(args.cpu_warn, args.mem_warn)
     display.display_monitor(checked_interval)
 
-
 def handle_report(args, parser):
     checked_date = check_date(args.date, parser)
     #report_var = report.doyourthing()
@@ -53,17 +52,18 @@ def get_sys_readings(prev_bytes_sent, prev_bytes_recv, interval):
 
 def main():
     parser = argparse.ArgumentParser(prog="sysmon")
-    subparsers = parser.add_subparsers(title="subcommands")
-    monitor_parser = subparsers.add_parser("monitor", help="gets realtime readings from CPU, memory, disks, and network. displays in CLI and logs them into specified log file")
+    subparsers = parser.add_subparsers(title="subcommands", required=True)
+    monitor_parser = subparsers.add_parser("monitor",
+                                           help="gets realtime readings from CPU, memory, disks, and network. displays in CLI and logs them into specified log file")
     monitor_parser.set_defaults(func=handle_monitor)
-    report_parser = subparsers.add_parser("report",help="reads a log file and prints min/avg/max for each metric on a specific date")
-    report_parser.set_defaults(func=handle_report)
     monitor_parser.add_argument("-i","--interval",type=float,default=DEFAULT_INTERVAL,help="set polling interval; default 2 secs")
     monitor_parser.add_argument("-l","--log",type=str,help="specify a log file path")
     monitor_parser.add_argument("--cpu_warn", action="store_true", help="when a cpu metric exceeds the threshold, trigger a desktop notification")
     monitor_parser.add_argument("--mem_warn", action="store_true", help="when a memory metric exceeds the threshold, trigger a desktop notification")
     monitor_parser.add_argument("-f","--format",type=str,default="json",choices=["json","csv"],help="support json/csv for the log output; default is json")
-    report_parser.add_argument("-d","--date", type=str,help="specify the date the report is supposed to be about in YYYY-MM-DD format; default today")
+    report_parser = subparsers.add_parser("report",help="reads a log file and prints min/avg/max for each metric on a specific date")
+    report_parser.set_defaults(func=handle_report)
+    report_parser.add_argument("-d","--date", type=str, help="specify the date the report is supposed to be about in YYYY-MM-DD format; default today")
     try:
         args = parser.parse_args()
         args.func(args, parser)

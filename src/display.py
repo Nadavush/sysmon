@@ -4,10 +4,22 @@ from rich.live import Live
 from rich.table import Table
 import modify_metrics
 from warn import check_warning_percentage
-from rich.console import Console
 REFRESH_PER_SECOND = 2
 
 warning_list = []
+
+def generate_grid(system_readings, first_time_flag):
+    grid = Table.grid()
+    cpu_tbl = make_cpu_table(system_readings["cpu"])
+    memory_tbl = make_memory_table(system_readings["memory"])
+    disk_tbl = make_disk_table(system_readings["disk"])
+    network_tbl, prev_network_bytes_sent, prev_network_bytes_recv = make_network_table(first_time_flag,
+                                                                                                        system_readings[
+                                                                                                            "network"])
+    grid.add_row(cpu_tbl, memory_tbl)
+    grid.add_row(disk_tbl, network_tbl)
+
+    return grid, False
 
 def make_cpu_cores_table(cpu_percentage_list_per_core):
     core_tbl = Table(box=None)
@@ -70,23 +82,17 @@ def make_network_table(first_time_flag, network_readings):
     network_tbl.add_row("Download Speed", download_speed)
     network_tbl.add_row("Data Sent in Bytes", str(bytes_sent))
     network_tbl.add_row("Data Received in Bytes", str(bytes_recv))
-    return network_tbl,bytes_sent, bytes_recv, False
+    return network_tbl, bytes_sent, bytes_recv
 
 def add_warning(string):
     warning_list.append(string)
 
-def make_warning_tbl():
-    warning_tbl = Table(box=None)
-    global warning_list
-    for warning in warning_list:
-        warning_tbl.add_row(warning)
-    warning_list = []
-    return warning_tbl
 
 
 def display_monitor(interval):
     """Creates a table of tables, each one of a different field (eg cpu, memory, disk, network),
-    calls main.get_sys_readings() to get data to display, updates live display every [interval] seconds
+    calls main.get_sys_readings() to get data to display, updates live display every [interval] seconds. prints to
+    display all optional warnings.
     Args:
         interval: amount of time that passes between each refresh of the display
 
@@ -97,15 +103,14 @@ def display_monitor(interval):
         prev_network_bytes_sent = 0
         prev_network_bytes_recv = 0
         while True:
-            grid = Table(box=None, title="[cyan]System Monitor")
             system_readings = main.get_sys_readings(prev_network_bytes_sent, prev_network_bytes_recv, interval)
-            cpu_tbl = make_cpu_table(system_readings["cpu"])
-            memory_tbl = make_memory_table(system_readings["memory"])
-            disk_tbl = make_disk_table(system_readings["disk"])
-            network_tbl, prev_network_bytes_sent, prev_network_bytes_recv, first_time_flag= make_network_table(first_time_flag,system_readings["network"])
-            warning_tbl = make_warning_tbl()
-            grid.add_row(cpu_tbl,disk_tbl)
-            grid.add_row(memory_tbl,network_tbl)
-            grid.add_row(warning_tbl)
+            grid, first_time_flag = generate_grid(system_readings, first_time_flag)
+            global warning_list
+            if warning_list:
+                live.console.print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                for warning in warning_list:
+                    live.console.print(warning)
+                warning_list = []
+
             live.update(grid)
             time.sleep(interval)

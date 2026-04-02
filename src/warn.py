@@ -20,7 +20,7 @@ def check_warning_percentage(percentage, is_cpu=False, is_mem=False):
     elif is_mem and memory_warn:
         percentage_status = check_percentage_status(percentage)
         if percentage_status == RED_STATUS:
-            display.add_warning(f"a memory threshold has exceeded to {percentage}.")
+            display.add_warning(f"A memory threshold has exceeded to {percentage}.")
         return color_percentage(percentage, percentage_status)
     return percentage
 

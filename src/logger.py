@@ -16,5 +16,3 @@ def log(system_readings):
         with open(logging_path,'a') as input_file:
             json.dump(system_readings, input_file)
 
-
-

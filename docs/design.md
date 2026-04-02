@@ -2,8 +2,6 @@
 
 **Language:** Python
 
-**Dates:** 15/03, 16/03, 28/03, 29/03
-
 ---
 
 ## Abstract Idea
