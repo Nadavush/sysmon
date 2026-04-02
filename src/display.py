@@ -63,7 +63,7 @@ def make_memory_table(memory_readings):
     used_memory_bytes = memory_readings["used"]
     total_memory_bytes = memory_readings["total"]
     used_memory_percentage = memory_readings["used-percentage"]
-    used_memory_percentage = check_warning_percentage(used_memory_percentage, is_mem=True)
+    used_memory_percentage = check_warning_percentage(used_memory_percentage, is_cpu=False)
     used_memory = modify_metrics.bytes2human(used_memory_bytes)
     total_memory = modify_metrics.bytes2human(total_memory_bytes)
     memory_tbl.add_row("Used Memory", used_memory)
