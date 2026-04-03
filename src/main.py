@@ -12,8 +12,8 @@ FILE_TYPE_INDEX = 1
 
 def handle_monitor(args, parser):
     checked_interval = check_interval(args.interval, parser)
-    check_logging_path(args.log, args.format, parser)
-    logger.prepare_logger(args.format, args.log)
+    check_logging_path(args.log, "json", parser)
+    logger.prepare_logger(args.log)
     warn.prepare_warn(args.cpu_warn, args.mem_warn)
     display.display_monitor(checked_interval)
 
@@ -91,7 +91,6 @@ def main():
     monitor_parser.add_argument("-l","--log",type=str,help="specify a log file path")
     monitor_parser.add_argument("--cpu_warn", action="store_true", help="when a cpu metric exceeds the threshold, trigger a desktop notification")
     monitor_parser.add_argument("--mem_warn", action="store_true", help="when a memory metric exceeds the threshold, trigger a desktop notification")
-    monitor_parser.add_argument("-f","--format",type=str,default="json",choices=["json","csv"],help="support json/csv for the log output; default is json")
     report_parser = subparsers.add_parser("report",help="reads a log file and prints min/avg/max for each metric on a specific date")
     report_parser.set_defaults(func=handle_report)
     report_parser.add_argument("-d","--date", type=str, help="specify the date the report is supposed to be about in YYYY-MM-DD format; default today")

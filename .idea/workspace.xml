@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5dad1b3-e262-4f49-8cbc-a06a20fcd7f0" name="Changes" comment="- fixed report.py in edge case of no logs&#10;&#10;- added docstrings to main">
+    <list default="true" id="e5dad1b3-e262-4f49-8cbc-a06a20fcd7f0" name="Changes" comment="- added docstrings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/display.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/display.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modify_metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modify_metrics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/warn.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/warn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +120,7 @@
       <workItem from="1774729895679" duration="10965000" />
       <workItem from="1774970505887" duration="3007000" />
       <workItem from="1774973804717" duration="16579000" />
-      <workItem from="1775166924172" duration="7310000" />
+      <workItem from="1775166924172" duration="7457000" />
     </task>
     <task id="LOCAL‎-00001" summary="test">
       <option name="closed" value="true" />
@@ -283,7 +282,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1775173243894</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL‎-00021" summary="- added docstrings">
+      <option name="closed" value="true" />
+      <created>1775174317199</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL‎-00021" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1775174317199</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,7 +328,8 @@
     <MESSAGE value="- logging correctly&#10;&#10;- displaying mbps correctly (bug fixing)&#10;&#10;- handled argparse bug where required=True suddenly doesnt work?" />
     <MESSAGE value="- added report system" />
     <MESSAGE value="- fixed report.py in edge case of no logs&#10;&#10;- added docstrings to main" />
-    <option name="LAST_COMMIT_MESSAGE" value="- fixed report.py in edge case of no logs&#10;&#10;- added docstrings to main" />
+    <MESSAGE value="- added docstrings" />
+    <option name="LAST_COMMIT_MESSAGE" value="- added docstrings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
