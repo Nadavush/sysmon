@@ -21,7 +21,7 @@ def generate_report_data(file_path, date):
 
 def get_highest_lowest_avg(lst):
     lst.sort()
-    return lst[0], lst[-1], sum(lst)/len(lst)
+    return lst[-1], lst[0], sum(lst)/len(lst)
 
 def get_all_date_readings(data, date):
     filtered_lst = []
