@@ -1,0 +1,18 @@
+[project]
+name = "sysmon_nadavush"
+version = "0.0.1"
+authors = [
+  { name="ndvgill", email="ndvgill@gmail.com" },
+]
+description = "A command-line tool that tracks CPU, memory, network, and disk usage in real time and displays live metrics of them in the terminal with a clean, colored interface. The tool additionally logs historical data to a file, which may be formated for both CSV and JSON for its output. Moreover, the tool may optionally alert the user with a desktop message when a certain metric in the cpu or memory exceeds its threshold, and aside from displaying and logging metrics, a user can instead ask for a report by date on min/max/avg of certain metrics."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/Nadavush/sysmon"

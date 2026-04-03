@@ -68,8 +68,8 @@ def get_sys_readings(prev_bytes_sent, prev_bytes_recv, interval):
         -disk is the data from collector for disk
         -network is the data from collector for network
         """
-    system_readings = {"time":datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),"cpu":collector.get_cpu_data(),"memory":collector.get_memory_data(),
-                       "disk":collector.get_disk_data(), "network":collector.get_network_data(interval, prev_bytes_sent, prev_bytes_recv)}
+    system_readings = {"time":datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),"cpu": collector.get_cpu_data(), "memory": collector.get_memory_data(),
+                       "disk": collector.get_disk_data(), "network": collector.get_network_data(interval, prev_bytes_sent, prev_bytes_recv)}
     logger.log(system_readings)
     return system_readings
 
